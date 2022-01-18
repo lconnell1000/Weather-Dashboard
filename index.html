@@ -9,7 +9,27 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb-0 h1 center">Weather Dashboard</span>
-      </nav>
+    </nav>
+    <div class="container-fluid">
+        <div class = "row">
+            <div class = "col-4">
+                <h2>Search for a City:</h2>
+                <input id="searchcity" type="text" placeholder="Enter the City Here">
+                <div><ul id="search-history"></ul></div>
+                <div class = "col-8">
+                    <div>
+                        <p id="city"></p>
+                        <p id="temperature"></p>
+                        <p id="wind-speed"></p>
+                        <p id="humidity"></p>
+                        <p id="UV-index"></p>
+                    </div>
+                    <div class = "row" id = "fivedayforecast"></div>
+                    <div id = "cards" class = "row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
