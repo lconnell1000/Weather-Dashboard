@@ -12,22 +12,24 @@
     </nav>
     <div class="container-fluid">
         <div class = "row">
-            <div class = "col-4">
-                <h2>Search for a City:</h2>
-                <input id="searchcity" type="text" placeholder="Enter the City Here">
-                <div><ul id="search-history"></ul></div>
-                <div class = "col-8">
-                    <div>
-                        <p id="city"></p>
-                        <p id="temperature"></p>
-                        <p id="wind-speed"></p>
-                        <p id="humidity"></p>
-                        <p id="UV-index"></p>
+            <section class = "col-4">
+                <form id="search-form" autocomplete="off">
+                    <div class="form-group">
+                        <label for="city-search">Search for a city:</label>
+                        <input type="text" class="form-control" id="city-search" placeholder="Enter city name">
                     </div>
-                    <div class = "row" id = "fivedayforecast"></div>
-                    <div id = "cards" class = "row"></div>
-                </div>
-            </div>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Search</button>
+                </form>
+                <div class="btn-group-vertical w-100" id="history">
+            </section>
+                <section class = "col-8">
+                    <div id="todays-weather">
+                        
+                    </div>
+                    <div id = "fivedayforecast"></div>
+                    
+                </section>
+            
         </div>
     </div>
 </body>
