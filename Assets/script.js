@@ -5,9 +5,14 @@ var longitude = "";
 var city;
 var temperature;
 var humidity;
-var windSpeed
+var windSpeed;
 var UV;
-var todaysWeather = document.querySelector("#todays-weather")
+var todaysWeather = document.querySelector("#todays-weather");
+var cityToSearch;
+var citiesStorage;
+var submitForm = document.querySelector("#submit-form");
+var savedCity;
+var weatherHistoryEl = document.querySelector("#weather-history")
 
 function displayWeather() {
     var weatherInfo = document.createElement('div');
@@ -30,5 +35,34 @@ function displayWeather() {
 
     todaysWeather.append(weatherInfo);
 
+  
+
 }
 
+function getWeatherinfo(event) {
+    event.preventDefault ();
+
+    cityToSearch = document.querySelector("#city-to-search").ariaValueMax
+
+    var cityLongLatURL = 'http://api.openweathermap.org/geo/1.0/direct?q=' + citySearch + '&appid=' + APIKey
+
+    localStorage.setItem('city', cityToSearch)
+    citiesStorage = localStorage.getItem('city')
+
+    submitForm.reset();
+
+    const citiesToStore = {
+        city: citiesStorage,
+    }
+    savedCity.push(citiesToStore)
+    localStorage.setItem("savedCity", JSON.stringify(savedCity));
+
+    btn = document.createElement("a");
+    btn.textcontent = citiesStorage
+    btn.classList.add('btn', 'btn-dark', 'm-2', 'w-100')
+
+    weatherHistoryEl.appendChild(btn)
+
+    //need to make a weather fetch function to get the data now we have the lat and long of the city stored
+    weatherFetch(cityLongLatURL)
+}
