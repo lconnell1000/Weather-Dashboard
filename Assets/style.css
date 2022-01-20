@@ -1,0 +1,24 @@
+.favourable {
+    background-color: green;
+    color: white;
+    box-sizing: content-box;
+    width: fit-content;
+}
+
+.moderate {
+    background-color: orange;
+    color: white;
+    box-sizing: content-box;
+    width: fit-content;
+}
+
+.servere {
+    background-color: red;
+    color: white;
+    box-sizing: content-box;
+    width: fit-content;
+}
+
+.bg-custom {
+    background-color: #0a2d4e;
+}
