@@ -9,7 +9,7 @@ var citySearch = document.querySelector('#search-city');
 var displayDate= moment();
 var searchHistory = [];
 
-// Initiate search
+// start weather search
 function search(a) {
   forecast.innerHTML='';
   current.innerHTML='';
@@ -23,7 +23,8 @@ function search(a) {
   render();
   fetchlongLat(a)
 } 
-// fetch city's lat and lon
+
+// fetch city's latitude and longitude
  function fetchlongLat(a) {
    var link5day = 'https://api.openweathermap.org/data/2.5/forecast?q='+a+'&cnt=6&appid='+APIkey+'&units=imperial';
    fetch(link5day)
@@ -51,7 +52,7 @@ function fetchWeather(lat,lon) {
       fiveDayWeather(APIweatherCall);
       });  
 }
-// display current weather
+// display current weather in a box on the upper right hand sade of page
 function currentWeather(data) {
     var cityName = document.createElement('h3');
     cityName.classList.add('row')
@@ -69,8 +70,8 @@ function currentWeather(data) {
     wind.textContent= "Wind: "+ data.current.wind_speed+ " MPH";
     humidity.textContent= "Humidity: "+ data.current.humidity+ " %";
     UV.textContent= "UV Index: "+ data.current.uvi;
-    // UV color
-    UVcolor(data.current.uvi,UV);
+    // neeed to pass the uv to a function to change its color
+    UvColorCoder(data.current.uvi,UV);
     current.appendChild(cityName);
     current.appendChild(img);
     current.appendChild(conditions);
@@ -78,10 +79,12 @@ function currentWeather(data) {
     conditions.appendChild(wind);
     conditions.appendChild(humidity);
     conditions.appendChild(UV);
-    // temp wind humidity UV index
+   
 }
-// display 5-day forecast
+// displays our 5-day forecast in another box underneath the current weather in a row
 function fiveDayWeather(data) {
+  //need to make a new displayDate with the moment in here so we dont keep adding
+  //5 days on each time we do a new weather search, was a bug i had to fix
     var dateDisplay= moment();
     for (var i=0; i<5;i++){
         card = document.createElement('div');
@@ -112,11 +115,11 @@ function fiveDayWeather(data) {
     }
 }
 
-//Render search history
+//function to display our search history
 function render() {
-   // Get search history from localStorage
+   // go to local storage to get our weather history
    var weatherHistory = JSON.parse(localStorage.getItem("weatherSearch"));
-   // If search history were retrieved from localStorage, update 
+   // If new search history then update it
    if (weatherHistory !== null) {
     searchHistory = weatherHistory;
    }
@@ -125,7 +128,7 @@ function render() {
 }
 
 
-// Add buttons
+// Add button for each of the cities in the search history
 function addBtn(a) {
   for (var j=0; j<a.length;j++) {
     var button= document.createElement('button');
@@ -134,21 +137,20 @@ function addBtn(a) {
     historyList.appendChild(button);
    };
 }
-// display UV color
-function UVcolor(index,UV) {
-  if (index<5) {
+// display the uv color coded, green for favourable, orange for moderate, red for severe
+function UvColorCoder(index,UV) {
+  if (index<3) {
     UV.className='favourable';
   }
-  else if (5<=index<8) {
+  else if (3<=index<5) {
     UV.className='moderate';
   }
-  else if (8<=index) {
+  else if (5<=index) {
     UV.className='servere';
   }
   return UV
 }
 
-// init
 
 render()
 
@@ -160,7 +162,6 @@ submitBtn.addEventListener('click', function() {
 
 historyList.addEventListener("click", function(event) {
   var element = event.target;
-  // Checks if element is a button
   if (element.matches("button") === true) {
     city =element.innerText;
     search(city);
