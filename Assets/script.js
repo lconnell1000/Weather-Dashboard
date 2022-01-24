@@ -21,10 +21,10 @@ function search(a) {
     localStorage.setItem("weatherSearch", JSON.stringify(searchHistory));
   }
   render();
-  fetchLangLot(a)
+  fetchlongLat(a)
 } 
 // fetch city's lat and lon
- function fetchLangLot(a) {
+ function fetchlongLat(a) {
    var link5day = 'https://api.openweathermap.org/data/2.5/forecast?q='+a+'&cnt=6&appid='+APIkey+'&units=imperial';
    fetch(link5day)
    .then(function (response) {
